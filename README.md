@@ -1,83 +1,112 @@
-# Delicious Discoveries - Recipe App
+# Scoop Wholefoods Recipe App
 
-A beautiful React application for exploring delicious recipes, built with Vite and Tailwind CSS.
+A modern web application for Scoop Wholefoods, featuring product listings, recipes, store locations, and company information.
 
-## Project Setup
+## Features
+
+- **Responsive Design**: Fully functional on desktop, tablet, and mobile devices
+- **Interactive UI**: Smooth animations and transitions using Framer Motion
+- **Multiple Pages**:
+  - Homepage with featured content
+  - About and Our Story pages
+  - Products page with filtering and search
+  - Recipes page with filtering, search, and modal details
+  - Store locations with interactive map links
+
+## Tech Stack
+
+- **React**: Frontend library for building the user interface
+- **React Router**: For handling navigation and routing
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Framer Motion**: Animation library for React
+- **React Icons**: Popular icon library
+- **Vite**: Build tool for fast development and production builds
+
+## Getting Started
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v14.x or higher)
-- npm (comes with Node.js) or [Yarn](https://yarnpkg.com/)
+- Node.js 14.x or higher
+- npm or yarn
 
 ### Installation
 
-1. Clone this repository:
-   ```bash
-   git clone <your-repo-url>
-   cd recipe-app
+1. Clone the repository
+   ```
+   git clone https://github.com/your-username/scoop-wholefoods-app.git
+   cd scoop-wholefoods-app
    ```
 
-2. Install dependencies:
-   ```bash
+2. Install dependencies
+   ```
    npm install
    # or
-   yarn
+   yarn install
    ```
 
-3. Start the development server:
-   ```bash
+3. Start the development server
+   ```
    npm run dev
    # or
    yarn dev
    ```
 
-4. Open your browser and visit: `http://localhost:5173/`
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Building for Production
+
+```
+npm run build
+# or
+yarn build
+```
+
+The built files will be in the `dist` directory, ready to be deployed.
+
+## Deployment
+
+This application is configured for easy deployment on Vercel:
+
+1. Push your code to a GitHub repository
+2. Connect your repository to Vercel
+3. Deploy with a single click
 
 ## Project Structure
 
 ```
 recipe-app/
-├── public/             # Static assets
+├── public/            # Public assets
 ├── src/
-│   ├── assets/         # Images and other assets
-│   ├── components/     # React components
-│   ├── App.jsx         # Main App component
-│   ├── main.jsx        # React entry point
-│   └── index.css       # Global styles with Tailwind
-├── index.html          # HTML entry point
-├── vite.config.js      # Vite configuration
-├── tailwind.config.js  # Tailwind CSS configuration
-└── package.json        # Project dependencies and scripts
+│   ├── components/    # Reusable UI components
+│   │   ├── Footer.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Layout.jsx
+│   │   ├── Navbar.jsx
+│   │   └── RecipeList.jsx
+│   ├── pages/         # Page components
+│   │   ├── AboutPage.jsx
+│   │   ├── HomePage.jsx
+│   │   ├── NotFoundPage.jsx
+│   │   ├── OurStoryPage.jsx
+│   │   ├── ProductsPage.jsx
+│   │   ├── RecipesPage.jsx
+│   │   └── StoresPage.jsx
+│   ├── App.jsx        # Main application component
+│   ├── index.css      # Global styles
+│   └── main.jsx       # Entry point
+├── .gitignore
+├── index.html
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+└── vite.config.js
 ```
-
-## Deployment to Vercel
-
-1. Push your code to GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin <your-github-repo-url>
-   git push -u origin main
-   ```
-
-2. Go to [Vercel](https://vercel.com/) and sign in with your GitHub account.
-
-3. Click "New Project" and import your GitHub repository.
-
-4. Configure your project settings if needed (Vite should be automatically detected).
-
-5. Click "Deploy" and wait for the build to complete.
-
-## Features
-
-- Responsive design for all devices
-- Beautiful UI with Tailwind CSS
-- Recipe cards with images and details
-- Welcoming hero section
 
 ## License
 
-MIT # test-site
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+
+- Images from Unsplash
+- Icons from React Icons
