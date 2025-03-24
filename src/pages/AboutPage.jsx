@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 function AboutPage() {
@@ -150,9 +149,9 @@ function AboutPage() {
             sustainable living and reducing our collective environmental impact.
           </p>
           <div className="mt-10">
-            <Link to="/our-story" className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+            <a href="/our-story" className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
               Discover Our Story
-            </Link>
+            </a>
           </div>
         </div>
       </section>

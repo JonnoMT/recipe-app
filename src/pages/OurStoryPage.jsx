@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 function OurStoryPage() {
@@ -240,12 +239,12 @@ function OurStoryPage() {
             We're just getting started, and we'd love for you to be part of our story. Visit one of our stores, try our products, and join our community of wholefood enthusiasts.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link to="/stores" className="bg-white text-amber-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-full transition duration-300">
+            <a href="/stores" className="bg-white text-amber-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-full transition duration-300">
               Find a Store
-            </Link>
-            <Link to="/products" className="bg-amber-600 text-white hover:bg-amber-700 font-semibold py-3 px-8 rounded-full transition duration-300">
+            </a>
+            <a href="/products" className="bg-amber-600 text-white hover:bg-amber-700 font-semibold py-3 px-8 rounded-full transition duration-300">
               Explore Products
-            </Link>
+            </a>
           </div>
         </div>
       </section>

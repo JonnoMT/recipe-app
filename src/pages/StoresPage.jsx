@@ -154,13 +154,10 @@ function StoresPage() {
 
   const handleStoreSelect = (store) => {
     setSelectedStore(store);
-    const storeDetailsElement = document.getElementById('store-details');
-    if (storeDetailsElement) {
-      window.scrollTo({
-        top: storeDetailsElement.offsetTop - 100,
-        behavior: 'smooth'
-      });
-    }
+    window.scrollTo({
+      top: document.getElementById('store-details').offsetTop - 100,
+      behavior: 'smooth'
+    });
   };
 
   return (

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiFilter, FiShoppingCart, FiHeart, FiSearch } from 'react-icons/fi';
 
@@ -352,9 +351,9 @@ function ProductsPage() {
             Visit one of our stores to experience package-free shopping or order online for delivery.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link to="/stores" className="bg-white text-gray-800 hover:bg-gray-100 font-semibold py-3 px-8 rounded-full transition duration-300">
+            <a href="/stores" className="bg-white text-gray-800 hover:bg-gray-100 font-semibold py-3 px-8 rounded-full transition duration-300">
               Find a Store
-            </Link>
+            </a>
             <button className="bg-amber-500 text-white hover:bg-amber-600 font-semibold py-3 px-8 rounded-full transition duration-300">
               Shop Online
             </button>

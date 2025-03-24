@@ -1,101 +1,79 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiX, FiShoppingCart, FiSearch } from 'react-icons/fi';
+import { FiMenu, FiX, FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
       } else {
-        setScrolled(false);
+        setIsScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
-  // Close mobile menu when clicking outside
+
+  // Close mobile menu when window is resized to desktop size
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.hamburger-button')) {
-        setIsOpen(false);
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
+        setIsMenuOpen(false);
       }
     };
-    
-    document.addEventListener('click', handleClickOutside);
+
+    window.addEventListener('resize', handleResize);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [isOpen]);
+  }, [isMenuOpen]);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <nav 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+      }`}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className={`text-2xl font-bold ${scrolled ? 'text-amber-600' : 'text-amber-500'}`}>
-              Scoop
-            </span>
-            <span className={`ml-1 text-2xl font-light ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-              Wholefoods
-            </span>
+            <span className="text-amber-600 font-bold text-2xl">Scoop</span>
+            <span className="text-gray-800 font-bold text-2xl">Wholefoods</span>
           </Link>
-          
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             <NavLink 
               to="/" 
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
+                `text-gray-700 hover:text-amber-600 font-medium transition-colors ${isActive ? 'text-amber-600' : ''}`
               }
+              end
             >
               Home
             </NavLink>
             <NavLink 
               to="/about" 
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
+                `text-gray-700 hover:text-amber-600 font-medium transition-colors ${isActive ? 'text-amber-600' : ''}`
               }
             >
               About
             </NavLink>
             <NavLink 
-              to="/our-story" 
-              className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
-              }
-            >
-              Our Story
-            </NavLink>
-            <NavLink 
               to="/products" 
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
+                `text-gray-700 hover:text-amber-600 font-medium transition-colors ${isActive ? 'text-amber-600' : ''}`
               }
             >
               Products
@@ -103,11 +81,7 @@ function Navbar() {
             <NavLink 
               to="/recipes" 
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
+                `text-gray-700 hover:text-amber-600 font-medium transition-colors ${isActive ? 'text-amber-600' : ''}`
               }
             >
               Recipes
@@ -115,166 +89,148 @@ function Navbar() {
             <NavLink 
               to="/stores" 
               className={({ isActive }) => 
-                `text-sm font-medium transition-colors ${
-                  scrolled 
-                    ? (isActive ? 'text-amber-600' : 'text-gray-700 hover:text-amber-600') 
-                    : (isActive ? 'text-amber-400' : 'text-white hover:text-amber-400')
-                }`
+                `text-gray-700 hover:text-amber-600 font-medium transition-colors ${isActive ? 'text-amber-600' : ''}`
               }
             >
               Stores
             </NavLink>
           </div>
-          
-          {/* Desktop Search and Cart */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button 
-              className={`p-2 rounded-full transition-colors ${
-                scrolled 
-                  ? 'text-gray-600 hover:text-amber-600 hover:bg-amber-50' 
-                  : 'text-white hover:text-amber-400 hover:bg-white/10'
-              }`}
-            >
-              <FiSearch size={20} />
-            </button>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Search */}
             <div className="relative">
-              <Link 
-                to="/cart" 
-                className={`p-2 rounded-full transition-colors ${
-                  scrolled 
-                    ? 'text-gray-600 hover:text-amber-600 hover:bg-amber-50' 
-                    : 'text-white hover:text-amber-400 hover:bg-white/10'
-                }`}
+              <button 
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="text-gray-700 hover:text-amber-600 transition-colors p-2"
               >
+                <FiSearch size={20} />
+              </button>
+              {isSearchOpen && (
+                <div className="absolute right-0 top-12 bg-white shadow-lg rounded-lg p-4 w-72">
+                  <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                    <input 
+                      type="text" 
+                      placeholder="Search products & recipes..." 
+                      className="flex-grow px-4 py-2 focus:outline-none"
+                    />
+                    <button className="bg-amber-500 text-white p-2 hover:bg-amber-600 transition-colors">
+                      <FiSearch size={18} />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Account */}
+            <button className="text-gray-700 hover:text-amber-600 transition-colors p-2">
+              <FiUser size={20} />
+            </button>
+            
+            {/* Cart */}
+            <div className="relative">
+              <button className="text-gray-700 hover:text-amber-600 transition-colors p-2">
                 <FiShoppingCart size={20} />
-                <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   3
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
-          
+
           {/* Mobile Menu Button */}
-          <div className="flex items-center space-x-3 md:hidden">
-            <div className="relative">
-              <Link 
-                to="/cart" 
-                className={`p-2 rounded-full transition-colors ${
-                  scrolled 
-                    ? 'text-gray-600 hover:text-amber-600 hover:bg-amber-50' 
-                    : 'text-white hover:text-amber-400 hover:bg-white/10'
-                }`}
-              >
-                <FiShoppingCart size={20} />
-                <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                  3
-                </span>
-              </Link>
-            </div>
-            <button
-              className={`hamburger-button p-2 rounded-md transition-colors ${
-                scrolled 
-                  ? 'text-gray-600 hover:bg-gray-100' 
-                  : 'text-white hover:bg-white/10'
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsOpen(!isOpen);
-              }}
+          <div className="lg:hidden flex items-center space-x-4">
+            <button className="text-gray-700 hover:text-amber-600 transition-colors p-2">
+              <FiShoppingCart size={20} />
+              <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                3
+              </span>
+            </button>
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-amber-600 transition-colors p-2"
             >
-              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
           </div>
         </div>
       </div>
-      
+
       {/* Mobile Menu */}
-      <div 
-        className={`mobile-menu md:hidden bg-white absolute w-full shadow-lg transition-all duration-300 ease-in-out ${
-          isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
-      >
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-full relative">
-              <input 
-                type="text" 
-                placeholder="Search products & recipes..." 
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-              <FiSearch className="absolute left-3 top-2.5 text-gray-400" size={18} />
+      {isMenuOpen && (
+        <div className="lg:hidden bg-white shadow-lg">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-col space-y-4">
+              <NavLink 
+                to="/" 
+                className={({ isActive }) => 
+                  `text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors ${isActive ? 'text-amber-600' : ''}`
+                }
+                onClick={() => setIsMenuOpen(false)}
+                end
+              >
+                Home
+              </NavLink>
+              <NavLink 
+                to="/about" 
+                className={({ isActive }) => 
+                  `text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors ${isActive ? 'text-amber-600' : ''}`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </NavLink>
+              <NavLink 
+                to="/products" 
+                className={({ isActive }) => 
+                  `text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors ${isActive ? 'text-amber-600' : ''}`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Products
+              </NavLink>
+              <NavLink 
+                to="/recipes" 
+                className={({ isActive }) => 
+                  `text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors ${isActive ? 'text-amber-600' : ''}`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Recipes
+              </NavLink>
+              <NavLink 
+                to="/stores" 
+                className={({ isActive }) => 
+                  `text-gray-700 hover:text-amber-600 font-medium py-2 transition-colors ${isActive ? 'text-amber-600' : ''}`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Stores
+              </NavLink>
+
+              {/* Mobile Search */}
+              <div className="py-2">
+                <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                  <input 
+                    type="text" 
+                    placeholder="Search products & recipes..." 
+                    className="flex-grow px-4 py-2 focus:outline-none"
+                  />
+                  <button className="bg-amber-500 text-white p-2 hover:bg-amber-600 transition-colors">
+                    <FiSearch size={18} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile Account */}
+              <div className="flex items-center py-2">
+                <FiUser size={20} className="text-gray-700 mr-3" />
+                <span className="text-gray-700 font-medium">My Account</span>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col">
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium border-b border-gray-100 ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </NavLink>
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium border-b border-gray-100 ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </NavLink>
-            <NavLink 
-              to="/our-story" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium border-b border-gray-100 ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              Our Story
-            </NavLink>
-            <NavLink 
-              to="/products" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium border-b border-gray-100 ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              Products
-            </NavLink>
-            <NavLink 
-              to="/recipes" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium border-b border-gray-100 ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              Recipes
-            </NavLink>
-            <NavLink 
-              to="/stores" 
-              className={({ isActive }) => 
-                `py-3 px-4 text-base font-medium ${
-                  isActive ? 'text-amber-600' : 'text-gray-800 hover:text-amber-600'
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              Stores
-            </NavLink>
-          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
