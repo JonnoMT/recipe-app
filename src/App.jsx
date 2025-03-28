@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import OurStoryPage from './pages/OurStoryPage';
@@ -10,20 +10,18 @@ import Layout from './components/Layout';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="our-story" element={<OurStoryPage />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="recipes" element={<RecipesPage />} />
-          <Route path="stores" element={<StoresPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="our-story" element={<OurStoryPage />} />
+        <Route path="products" element={<ProductsPage />} />
+        <Route path="recipes" element={<RecipesPage />} />
+        <Route path="stores" element={<StoresPage />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
-export default App; 
+export default App;
